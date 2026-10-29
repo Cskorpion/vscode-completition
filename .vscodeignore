@@ -1,0 +1,8 @@
+# Exclude source, tests and build config from the packaged .vsix;
+# the compiled output under out/ is what the extension runs.
+src/**
+test/**
+out-test/**
+tsconfig.json
+tsconfig.test.json
+*.map

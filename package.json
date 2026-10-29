@@ -1,0 +1,84 @@
+{
+    "name": "vscode-tab-complete",
+    "displayName": "vscode-tab-complete",
+    "description": "Inline code completions powered by the pi coding agent running as a subprocess.",
+    "version": "0.1.0",
+    "publisher": "Cskorpion",
+    "license": "MIT",
+    "engines": {
+        "vscode": "^1.125.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "main": "./out/extension.js",
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "contributes": {
+        "configuration": {
+            "title": "vscode-tab-complete",
+            "properties": {
+                "vscodeTabComplete.command": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        "pi"
+                    ],
+                    "markdownDescription": "Command that launches the pi agent. Use `[\"pi\"]` when VS Code runs inside WSL (Remote-WSL). Use `[\"wsl.exe\", \"-e\", \"pi\"]` when VS Code runs on Windows and pi is installed inside WSL. The first element is the executable; the remaining elements are passed before pi's own arguments."
+                },
+                "vscodeTabComplete.model": {
+                    "type": "string",
+                    "default": "",
+                    "markdownDescription": "Optional `--model` argument passed to pi (e.g. `glm-5.3-flash-nvfp4`). Empty uses pi's configured default model from `~/.pi/agent/settings.json`."
+                },
+                "vscodeTabComplete.debounceMs": {
+                    "type": "number",
+                    "default": 600,
+                    "minimum": 0,
+                    "maximum": 10000,
+                    "markdownDescription": "Milliseconds to wait after the last keystroke before asking pi. Later keystrokes replace a pending request."
+                },
+                "vscodeTabComplete.timeoutMs": {
+                    "type": "number",
+                    "default": 15000,
+                    "minimum": 1000,
+                    "maximum": 600000,
+                    "markdownDescription": "Hard limit in milliseconds before the pi subprocess is killed. Protects against hung model requests."
+                },
+                "vscodeTabComplete.contextPrefixChars": {
+                    "type": "number",
+                    "default": 2000,
+                    "minimum": 0,
+                    "markdownDescription": "Characters of context before the cursor that are sent to pi."
+                },
+                "vscodeTabComplete.contextSuffixChars": {
+                    "type": "number",
+                    "default": 1000,
+                    "minimum": 0,
+                    "markdownDescription": "Characters of context after the cursor that are sent to pi."
+                },
+                "vscodeTabComplete.debug": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Log provider activity to the 'vscode-tab-complete' output channel."
+                }
+            }
+        }
+    },
+    "scripts": {
+        "compile": "tsc",
+        "watch": "tsc --watch",
+        "test": "tsc -p tsconfig.test.json && node --test \"out-test/test/*.test.js\"",
+        "vscode:prepublish": "npm run compile",
+        "package": "vsce package"
+    },
+    "devDependencies": {
+        "@types/node": "^26.0.1",
+        "@types/vscode": "^1.125.0",
+        "@vscode/vsce": "^3.9.2",
+        "typescript": "^6.0.3"
+    }
+}

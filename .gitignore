@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Build output
+out/
+out-test/
+
+# Packaging
+*.vsix
+
+# OS noise
+.DS_Store
+Thumbs.db

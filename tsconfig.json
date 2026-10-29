@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2023",
+        "outDir": "out",
+        "lib": ["ES2023"],
+        "types": ["node"],
+        "moduleResolution": "bundler",
+        "sourceMap": true,
+        "rootDir": "src",
+        "strict": true,
+        "noEmitOnError": true,
+        "forceConsistentCasingInFileNames": false
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"]
+}
